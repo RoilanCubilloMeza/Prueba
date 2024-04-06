@@ -1,8 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import AddFavoriteRecipe from './AddFavoriteRecipe';
 import SkeletonComponent from './SkeletonComponent';
-import "../pages/styles/RecipeCard.css"
-import "../pages/styles/pagination.css"
+
 
 
 const DisplayComponent: React.FC<{ data: any }> = ({ data }) => {

@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Header from '@/app/components/Header';
-import "@/app/styles/FavoritesRecipes.css"
-import "@/app/styles/Header.css"
+
 
 
 interface Ingredient {
