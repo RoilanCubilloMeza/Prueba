@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, Suspense } from 'react';
 import AddFavoriteRecipe from './AddFavoriteRecipe';
 import SkeletonComponent from './SkeletonComponent';
