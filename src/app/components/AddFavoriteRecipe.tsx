@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
+import "@/app/pages/styles/AddFavoriteRecipe.css"
+import useLocalStorage from '../pages/hooks/useLocalStorage';
 
 interface Recipe {
   label: string;

@@ -2,9 +2,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import "../styles//Header.css"
+import "../styles/FavoritesRecipes.css"
 import Header from '@/app/components/Header';
-
-
 
 interface Ingredient {
   text: string;
