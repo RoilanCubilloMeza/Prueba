@@ -3,7 +3,8 @@ import { fetchData } from '../api/index';
 import DisplayComponent from './RecipeCard';
 import Link from 'next/link';
 import SkeletonComponent from './SkeletonComponent';
-
+import '../pages/styles/RecipeCard.css';
+import '../pages/styles/ApiComponents.css';
 
 const SearchComponent: React.FC = () => {
   const [data, setData] = useState<any>(null);
