@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Header from '@/app/components/Header';
-import "../styles/Header.css"
-import "../styles/FavoritesRecipes.css"
+import "@/app/styles/FavoritesRecipes.css"
+import "@/app/styles/Header.css"
+
 
 interface Ingredient {
   text: string;
@@ -23,7 +24,7 @@ interface Recipe {
 
 const FavoritesPage: React.FC = () => {
   const [favorites, setFavorites] = useState<Recipe[]>(() => {
-    const storedFavorites = localStorage.getItem('favorites');
+    const storedFavorites = localStorage.getItem('/favorites');
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
 
