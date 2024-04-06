@@ -1,44 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useDebugValue, useEffect, useState } from "react";
 
-function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-  const readValue = () => {
-    if (typeof window === 'undefined') {
-      return initialValue;
-    }
-
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
-      return initialValue;
-    }
-  };
-
-  const [storedValue, setStoredValue] = useState<T>(readValue);
-
-  const setValue = (value: T | ((val: T) => T)) => {
-    if (typeof window == 'undefined') {
-      console.warn(
-        `Tried setting localStorage key “${key}” even though environment is not a client`
-      );
-    }
-
-    try {
-      const newValue = value instanceof Function ? value(storedValue) : value;
-      window.localStorage.setItem(key, JSON.stringify(newValue));
-      setStoredValue(newValue);
-    } catch (error) {
-      console.warn(`Error setting localStorage key “${key}”:`, error);
-    }
-  };
+export function useLocalStorage<T>(key: string, initialState: T): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [state, setState] = useState<T>(initialState);
+  useDebugValue(state);
 
   useEffect(() => {
-    setStoredValue(readValue());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const item = localStorage.getItem(key);
+    if (item) setState(parse<T>(item));
   }, [key]);
 
-  return [storedValue, setValue];
+  useEffect(() => {
+    if (state && typeof state !== "function") {
+      localStorage.setItem(key, JSON.stringify(state));
+    }
+  }, [key, state]);
+
+  return [state, setState];
 }
 
-export default useLocalStorage;
+function parse<T>(obj: string): T {
+  try {
+    return JSON.parse(obj);
+  } catch (e) {
+    return obj as unknown as T;
+  }
+}
